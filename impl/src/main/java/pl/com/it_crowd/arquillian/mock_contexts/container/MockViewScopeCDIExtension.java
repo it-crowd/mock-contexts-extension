@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MockViewScopeExtension implements Extension {
+public class MockViewScopeCDIExtension implements Extension {
 
     @SuppressWarnings("UnusedDeclaration")
     private void addScope(@Observes final BeforeBeanDiscovery event)

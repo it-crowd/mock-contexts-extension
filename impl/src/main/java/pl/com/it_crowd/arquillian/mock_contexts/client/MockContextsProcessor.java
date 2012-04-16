@@ -5,7 +5,7 @@ import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.ServiceProviderContainer;
-import pl.com.it_crowd.arquillian.mock_contexts.container.MockViewScopeExtension;
+import pl.com.it_crowd.arquillian.mock_contexts.container.MockViewScopeCDIExtension;
 import pl.com.it_crowd.arquillian.mock_contexts.container.MockViewScopedContext;
 
 import javax.enterprise.inject.spi.Extension;
@@ -22,7 +22,7 @@ public class MockContextsProcessor implements ApplicationArchiveProcessor {
             ((ClassContainer) appArchive).addClass(MockViewScopedContext.class);
         }
         if (appArchive instanceof ServiceProviderContainer) {
-            ((ServiceProviderContainer) appArchive).addAsServiceProviderAndClasses(Extension.class, MockViewScopeExtension.class);
+            ((ServiceProviderContainer) appArchive).addAsServiceProviderAndClasses(Extension.class, MockViewScopeCDIExtension.class);
         }
     }
 }

@@ -17,20 +17,6 @@ public class MockViewScopedContext implements ManagedContext {
 
     private Map<Contextual<?>, CreationalContext<?>> creationalContextMap;
 
-    private boolean initialized = false;
-
-// --------------------- GETTER / SETTER METHODS ---------------------
-
-    public boolean isInitialized()
-    {
-        return initialized;
-    }
-
-    public void setInitialized(boolean initialized)
-    {
-        this.initialized = initialized;
-    }
-
 // ------------------------ INTERFACE METHODS ------------------------
 
 
