@@ -1,6 +1,7 @@
 package pl.com.it_crowd.arquillian.mock_contexts.container;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
@@ -29,19 +30,19 @@ public class MockViewScopeCDIExtension implements Extension {
         event.addScope(ViewScoped.class, true, true);
     }
 
-    private Bean<MockViewScopedContext> getContextBean(final MockViewScopedContext viewContext, BeanManager beanManager)
+    private <T extends Context> Bean<T> getContextBean(final T viewContext, BeanManager beanManager)
     {
-        final InjectionTarget<MockViewScopedContext> injectionTarget = beanManager.createInjectionTarget(
-            beanManager.createAnnotatedType(MockViewScopedContext.class));
+        final Class<? extends Context> contextClass = viewContext.getClass();
+        @SuppressWarnings("unchecked") final InjectionTarget<T> injectionTarget = (InjectionTarget<T>) beanManager.createInjectionTarget(
+            beanManager.createAnnotatedType(contextClass));
         final HashSet<Type> types = new HashSet<Type>();
-        types.add(MockViewScopedContext.class);
+        types.add(contextClass);
         final HashSet<Annotation> qualifiers = new HashSet<Annotation>();
         qualifiers.add(new AnnotationLiteral<Default>() {
         });
         qualifiers.add(new AnnotationLiteral<Any>() {
         });
-        final Class<MockViewScopedContext> beanClass = MockViewScopedContext.class;
-        return new Bean<MockViewScopedContext>() {
+        return new Bean<T>() {
             public Set<Type> getTypes()
             {
                 return types;
@@ -69,7 +70,7 @@ public class MockViewScopeCDIExtension implements Extension {
 
             public Class<?> getBeanClass()
             {
-                return beanClass;
+                return contextClass;
             }
 
             public boolean isAlternative()
@@ -87,12 +88,12 @@ public class MockViewScopeCDIExtension implements Extension {
                 return injectionTarget.getInjectionPoints();
             }
 
-            public MockViewScopedContext create(CreationalContext<MockViewScopedContext> context)
+            public T create(CreationalContext<T> context)
             {
                 return viewContext;
             }
 
-            public void destroy(MockViewScopedContext instance, CreationalContext<MockViewScopedContext> context)
+            public void destroy(T instance, CreationalContext<T> context)
             {
                 // Call @PreDestroy
                 injectionTarget.preDestroy(instance);
@@ -105,7 +106,7 @@ public class MockViewScopeCDIExtension implements Extension {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    private void processAnnotatedType(@Observes final ProcessAnnotatedType<MockViewScopedContext> event)
+    private void processAnnotatedType(@Observes final ProcessAnnotatedType<AbstractMockContext> event)
     {
         event.veto();
     }
@@ -114,8 +115,13 @@ public class MockViewScopeCDIExtension implements Extension {
     private void registerContext(@Observes final AfterBeanDiscovery event, BeanManager beanManager)
     {
         final MockViewScopedContext mockViewScopedContext = new MockViewScopedContext();
-        final Bean<MockViewScopedContext> contextBean = getContextBean(mockViewScopedContext, beanManager);
-        event.addBean(contextBean);
+        final Bean<MockViewScopedContext> mockViewScopedContextBean = getContextBean(mockViewScopedContext, beanManager);
+        event.addBean(mockViewScopedContextBean);
         event.addContext(mockViewScopedContext);
+
+        final MockConversationScopedContext mockConversationScopedContext = new MockConversationScopedContext();
+        final Bean<MockConversationScopedContext> conversationScopedContextBean = getContextBean(mockConversationScopedContext, beanManager);
+        event.addBean(conversationScopedContextBean);
+        event.addContext(mockConversationScopedContext);
     }
 }

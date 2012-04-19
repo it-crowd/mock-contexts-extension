@@ -1,16 +1,17 @@
 package pl.com.it_crowd.arquillian.mock_contexts.container;
 
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 import java.lang.annotation.Annotation;
 
-public class MockViewScopedContext extends AbstractMockContext {
+public class MockConversationScopedContext extends AbstractMockContext {
 // ------------------------ INTERFACE METHODS ------------------------
 
 
 // --------------------- Interface Context ---------------------
 
+    @Override
     public Class<? extends Annotation> getScope()
     {
-        return ViewScoped.class;
+        return ConversationScoped.class;
     }
 }

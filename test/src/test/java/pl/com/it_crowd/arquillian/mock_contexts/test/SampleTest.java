@@ -9,9 +9,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import pl.com.it_crowd.arquillian.mock_contexts.ViewScoped;
+import pl.com.it_crowd.arquillian.mock_contexts.ConversationScopeRequired;
+import pl.com.it_crowd.arquillian.mock_contexts.ViewScopeRequired;
 
-import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
@@ -37,7 +37,7 @@ public class SampleTest {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @ConversationScoped
+    @ConversationScopeRequired
     @Test
     public void conversationScopedBeanTest()
     {
@@ -46,7 +46,7 @@ public class SampleTest {
         Assert.assertEquals(1, conversationalComponent.getIndex());
     }
 
-    @ViewScoped
+    @ViewScopeRequired
     @Test
     public void viewScopedBeanTest()
     {
