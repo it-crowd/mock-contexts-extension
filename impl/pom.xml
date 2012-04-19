@@ -5,9 +5,8 @@
 
     <parent>
         <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
-        <artifactId>mock-contexts-extension-parent</artifactId>
+        <artifactId>mock-contexts-extension</artifactId>
         <version>0.1-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>mock-contexts-extension-impl</artifactId>

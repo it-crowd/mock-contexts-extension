@@ -9,10 +9,54 @@
     <version>0.1-SNAPSHOT</version>
 
     <modules>
-        <module>parent</module>
+        <!--<module>parent</module>-->
         <module>api</module>
         <module>impl</module>
         <module>test</module>
     </modules>
 
+    <properties>
+        <arquillian.version>1.0.0.Final</arquillian.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian.core</groupId>
+                <artifactId>arquillian-core-spi</artifactId>
+                <version>${arquillian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>arquillian-container-test-spi</artifactId>
+                <version>${arquillian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.arquillian.test</groupId>
+                <artifactId>arquillian-test-spi</artifactId>
+                <version>${arquillian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-api</artifactId>
+                <version>1.1.Final</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>it-crowd.com.pl</id>
+            <name>IT Crowd company Internal Repository</name>
+            <url>http://artifactory.it-crowd.com.pl/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>it-crowd.com.pl</id>
+            <name>IT Crowd company Repository</name>
+            <url>http://artifactory.it-crowd.com.pl/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
