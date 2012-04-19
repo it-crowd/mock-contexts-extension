@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>mock-contexts-extension</groupId>
+    <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
     <artifactId>mock-contexts-extension-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -40,4 +40,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>it-crowd.com.pl</id>
+            <name>IT Crowd company Internal Repository</name>
+            <url>http://artifactory.it-crowd.com.pl/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>it-crowd.com.pl</id>
+            <name>IT Crowd company Repository</name>
+            <url>http://artifactory.it-crowd.com.pl/libs-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

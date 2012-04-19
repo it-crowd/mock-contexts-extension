@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>mock-contexts-extension</groupId>
+        <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
         <artifactId>mock-contexts-extension-parent</artifactId>
         <version>0.1-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-arquillian-container-remote</artifactId>
-            <version>7.1.1.Final</version>
+            <version>7.1.0.Beta1</version>
             <scope>test</scope>
         </dependency>
 
