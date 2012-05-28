@@ -27,7 +27,11 @@ public class MockFacesContextTest {
 
     final Map<Object, Object> attributes = new HashMap<Object, Object>();
 
+    final Map<Object, Object> otherAttributes = new HashMap<Object, Object>();
+
     private FacesContext mock;
+
+    private FacesContext otherMock;
 
 // -------------------------- STATIC METHODS --------------------------
 
@@ -43,14 +47,14 @@ public class MockFacesContextTest {
 
 // -------------------------- OTHER METHODS --------------------------
 
-    @FacesContextRequired
+    @FacesContextRequired(name = "other")
     @Test
-    public void facesContextAvailabile()
+    public void facesContextAvailabile2()
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Assert.assertNotNull(facesContext);
-        Assert.assertSame(mock, facesContext);
-        Assert.assertEquals(attributes, facesContext.getAttributes());
+        Assert.assertSame(otherMock, facesContext);
+        Assert.assertEquals(otherAttributes, facesContext.getAttributes());
     }
 
     @Test
@@ -58,6 +62,16 @@ public class MockFacesContextTest {
     {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Assert.assertNull(facesContext);
+    }
+
+    @FacesContextRequired
+    @Test
+    public void facesContextNr1Availabile1()
+    {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Assert.assertNotNull(facesContext);
+        Assert.assertSame(mock, facesContext);
+        Assert.assertEquals(attributes, facesContext.getAttributes());
     }
 
     @MockFacesContextProducer
@@ -68,5 +82,15 @@ public class MockFacesContextTest {
             when(mock.getAttributes()).thenReturn(attributes);
         }
         return mock;
+    }
+
+    @MockFacesContextProducer(name = "other")
+    public FacesContext otherMockFacesContext()
+    {
+        if (otherMock == null) {
+            otherMock = mock(FacesContext.class);
+            when(otherMock.getAttributes()).thenReturn(otherAttributes);
+        }
+        return otherMock;
     }
 }
