@@ -114,7 +114,7 @@ public class MockContextsManager {
         }
         if (event.getTestMethod().getAnnotation(ViewScopeRequired.class) != null) {
             try {
-                beanManagerInstance.get().getContext(ConversationScoped.class);
+                beanManagerInstance.get().getContext(ViewScoped.class);
                 final MockViewScopedContext context = getViewScopedContext();
                 context.invalidate();
                 context.deactivate();
