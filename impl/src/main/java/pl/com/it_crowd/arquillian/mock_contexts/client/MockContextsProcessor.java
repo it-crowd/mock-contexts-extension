@@ -27,7 +27,7 @@ public class MockContextsProcessor implements ApplicationArchiveProcessor, Proto
     {
         //        Workaround for SHRINKWRAP-419
         if (archive instanceof EnterpriseArchive) {
-            for (Node node : archive.get("/").getChildren()) {
+            for (Node node : archive.getContent().values()) {
                 final Asset asset = node.getAsset();
                 if (asset != null && asset instanceof ArchiveAsset && Testable.isArchiveToTest((Archive) ((ArchiveAsset) asset).getArchive())) {
                     process(((ArchiveAsset) asset).getArchive(), testClass);
@@ -35,13 +35,11 @@ public class MockContextsProcessor implements ApplicationArchiveProcessor, Proto
             }
             return;
         }
-        if (archive.getName().endsWith(".war")) {
-            if (archive instanceof ClassContainer) {
-                ((ClassContainer) archive).addClass(MockConversation.class);
-            }
-            if (archive instanceof ServiceProviderContainer) {
-                ((ServiceProviderContainer) archive).addAsServiceProviderAndClasses(Extension.class, MockContextsCDIExtension.class);
-            }
+        if (archive instanceof ClassContainer) {
+            ((ClassContainer) archive).addClass(MockConversation.class);
+        }
+        if (archive instanceof ServiceProviderContainer) {
+            ((ServiceProviderContainer) archive).addAsServiceProviderAndClasses(Extension.class, MockContextsCDIExtension.class);
         }
     }
 
@@ -60,12 +58,6 @@ public class MockContextsProcessor implements ApplicationArchiveProcessor, Proto
             if (node != null) {
                 archive.delete(warBeansDescriptorPath);
                 archive.add(node.getAsset(), warBeansDescriptorPath);
-            }
-            if (archive instanceof ClassContainer) {
-                ((ClassContainer) archive).addClass(MockConversation.class);
-            }
-            if (archive instanceof ServiceProviderContainer) {
-                ((ServiceProviderContainer) archive).addAsServiceProviderAndClasses(Extension.class, MockContextsCDIExtension.class);
             }
         }
     }

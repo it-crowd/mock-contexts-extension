@@ -16,6 +16,11 @@ public class ConversationalComponent implements Serializable {
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
+    public Conversation getConversation()
+    {
+        return conversation;
+    }
+
     public int getIndex()
     {
         return index;
