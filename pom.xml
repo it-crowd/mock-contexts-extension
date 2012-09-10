@@ -15,7 +15,7 @@
     </modules>
 
     <properties>
-        <arquillian.version>1.0.0.Final</arquillian.version>
+        <arquillian.version>1.0.2.Final</arquillian.version>
     </properties>
 
     <dependencyManagement>

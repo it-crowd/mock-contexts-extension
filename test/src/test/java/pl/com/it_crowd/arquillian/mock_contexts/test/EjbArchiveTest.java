@@ -5,7 +5,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.junit.Assert;
@@ -19,7 +19,7 @@ import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
-public class SampleTest {
+public class EjbArchiveTest {
 // ------------------------------ FIELDS ------------------------------
 
     @Inject
@@ -41,8 +41,8 @@ public class SampleTest {
             .clazz(MockConversation.class.getCanonicalName())
             .up()
             .exportAsString();
-        return ShrinkWrap.create(WebArchive.class, SampleTest.class.getSimpleName() + ".war")
-            .addAsWebInfResource(new StringAsset(beansDescriptor), "beans.xml")
+        return ShrinkWrap.create(JavaArchive.class, SampleTest.class.getSimpleName() + ".jar")
+            .addAsManifestResource(new StringAsset(beansDescriptor), "beans.xml")
             .addClass(ConversationalComponent.class)
             .addClass(ViewScopedComponent.class);
     }

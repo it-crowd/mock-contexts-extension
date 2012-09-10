@@ -1,6 +1,4 @@
-package pl.com.it_crowd.arquillian.mock_contexts.test;
-
-import pl.com.it_crowd.arquillian.mock_contexts.MockContextsManager;
+package pl.com.it_crowd.arquillian.mock_contexts.container;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ContextNotActiveException;
@@ -12,7 +10,6 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 @Alternative
 @ConversationScoped
@@ -22,8 +19,6 @@ public class MockConversation implements Conversation, Serializable {
     private static Set<String> ACTIVE_CONVERSATIONS = new HashSet<String>();
 
     private static long CONVERSATION_ID_COUNTER = 1;
-
-    private static final Logger log = Logger.getLogger(MockContextsManager.class.getName());
 
     private boolean _transient;
 
@@ -35,6 +30,7 @@ public class MockConversation implements Conversation, Serializable {
 
 // --------------------------- CONSTRUCTORS ---------------------------
 
+    @SuppressWarnings("UnusedDeclaration")
     public MockConversation()
     {
     }
