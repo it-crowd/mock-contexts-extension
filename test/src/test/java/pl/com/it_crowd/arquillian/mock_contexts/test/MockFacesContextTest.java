@@ -1,25 +1,28 @@
 package pl.com.it_crowd.arquillian.mock_contexts.test;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
 import junit.framework.Assert;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenImporter;
-import org.jboss.shrinkwrap.resolver.api.maven.filter.DependencyFilter;
+import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import pl.com.it_crowd.arquillian.mock_contexts.FacesContextRequired;
 import pl.com.it_crowd.arquillian.mock_contexts.MockFacesContextProducer;
-
-import javax.faces.context.FacesContext;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(Arquillian.class)
 public class MockFacesContextTest {
@@ -36,13 +39,18 @@ public class MockFacesContextTest {
 // -------------------------- STATIC METHODS --------------------------
 
     @Deployment
-    public static Archive getArchive()
+    public static Archive<?> getArchive()
     {
-        return ShrinkWrap.create(MavenImporter.class, MockFacesContextTest.class.getSimpleName() + ".war")
-            .loadEffectivePom("pom.xml")
-            .importAnyDependencies(new DependencyFilter("org.mockito:mockito-all"))
-            .as(WebArchive.class)
-            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+        final MavenDependencyResolver resolver =
+                DependencyResolvers.use(MavenDependencyResolver.class)
+                .loadMetadataFromPom("pom.xml")
+                .goOffline();
+
+        Archive<?> archive = ShrinkWrap.create(WebArchive.class)
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsLibraries(resolver.artifact("org.mockito:mockito-all").resolveAsFiles());
+
+        return archive;
     }
 
 // -------------------------- OTHER METHODS --------------------------
