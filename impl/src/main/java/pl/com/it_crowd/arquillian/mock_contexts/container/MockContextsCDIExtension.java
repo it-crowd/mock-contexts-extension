@@ -27,7 +27,12 @@ public class MockContextsCDIExtension implements Extension {
     @SuppressWarnings("UnusedDeclaration")
     private void addScope(@Observes final BeforeBeanDiscovery event)
     {
-        event.addScope(ViewScoped.class, true, true);
+        try {
+            Class.forName("javax.faces.bean.ViewScoped");
+            event.addScope(ViewScoped.class, true, true);
+        } catch (ClassNotFoundException e) {
+
+        }
     }
 
     private <T extends Context> Bean<T> getContextBean(final T viewContext, BeanManager beanManager)
@@ -114,6 +119,15 @@ public class MockContextsCDIExtension implements Extension {
     @SuppressWarnings("UnusedDeclaration")
     private void registerContext(@Observes final AfterBeanDiscovery event, BeanManager beanManager)
     {
+        // Bail out of we can't find ViewScoped.
+        // Means we're probably Running as client (@RunAsClient)
+        try {
+            Class.forName("javax.faces.bean.ViewScoped");
+        } catch (ClassNotFoundException e) {
+            return;
+        }
+
+
         final MockViewScopedContext mockViewScopedContext = new MockViewScopedContext();
         final Bean<MockViewScopedContext> mockViewScopedContextBean = getContextBean(mockViewScopedContext, beanManager);
         event.addBean(mockViewScopedContextBean);
