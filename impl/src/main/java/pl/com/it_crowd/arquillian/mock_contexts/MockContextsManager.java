@@ -30,8 +30,11 @@ public class MockContextsManager {
 
 // -------------------------- STATIC METHODS --------------------------
 
-    private static void setFacesContextCurrentInstance(FacesContext mock)
+    private static void setFacesContextCurrentInstance(Object objMock)
     {
+
+        FacesContext mock = (FacesContext) objMock;
+
         try {
             Method setCurrentInstance = FacesContext.class.getDeclaredMethod("setCurrentInstance", FacesContext.class);
             setCurrentInstance.setAccessible(true);
