@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+        <groupId>pl.itcrowd.mock-contexts-extension</groupId>
         <artifactId>mock-contexts-extension</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -57,22 +57,22 @@
         </dependency>
 
         <dependency>
-            <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+            <groupId>pl.itcrowd.mock-contexts-extension</groupId>
             <artifactId>mock-contexts-extension-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+            <groupId>pl.itcrowd.mock-contexts-extension</groupId>
             <artifactId>mock-contexts-extension-impl</artifactId>
-            <scope>runtime</scope>
             <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>${arquillian.version}</version>
+            <version>${version.arquillian}</version>
             <scope>test</scope>
         </dependency>
 
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
-            <version>${arquillian.version}</version>
+            <version>${version.arquillian}</version>
             <scope>test</scope>
         </dependency>
 
@@ -97,4 +97,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

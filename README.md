@@ -9,16 +9,16 @@ Usage
 Just add impl module to classpath and run test either from IDE or maven.
 
     <dependency>
-        <groupid>pl.com.it-crowd.mock-contexts-extension</groupid>
+        <groupid>pl.itcrowd.mock-contexts-extension</groupid>
         <artifactid>mock-contexts-extension-api</artifactid>
-        <version>0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
-        <groupid>pl.com.it-crowd.mock-contexts-extension</groupid>
+        <groupid>pl.itcrowd.mock-contexts-extension</groupid>
         <artifactid>mock-contexts-extension-impl</artifactid>
-        <version>0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
         <scope>runtime</scope>
     </dependency>
 

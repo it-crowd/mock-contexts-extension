@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+        <groupId>pl.itcrowd.mock-contexts-extension</groupId>
         <artifactId>mock-contexts-extension</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>mock-contexts-extension-impl</artifactId>
@@ -29,7 +29,7 @@
         </dependency>
 
         <dependency>
-            <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+            <groupId>pl.itcrowd.mock-contexts-extension</groupId>
             <artifactId>mock-contexts-extension-api</artifactId>
             <version>${project.version}</version>
         </dependency>

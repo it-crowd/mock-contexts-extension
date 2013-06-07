@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>pl.com.it-crowd.mock-contexts-extension</groupId>
+    <groupId>pl.itcrowd.mock-contexts-extension</groupId>
     <artifactId>mock-contexts-extension</artifactId>
     <packaging>pom</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <modules>
         <module>api</module>
@@ -15,7 +15,10 @@
     </modules>
 
     <properties>
-        <arquillian.version>1.0.2.Final</arquillian.version>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <version.arquillian>1.0.3.Final</version.arquillian>
     </properties>
 
     <dependencyManagement>
@@ -23,37 +26,50 @@
             <dependency>
                 <groupId>org.jboss.arquillian.core</groupId>
                 <artifactId>arquillian-core-spi</artifactId>
-                <version>${arquillian.version}</version>
+                <version>${version.arquillian}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.container</groupId>
                 <artifactId>arquillian-container-test-spi</artifactId>
-                <version>${arquillian.version}</version>
+                <version>${version.arquillian}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.test</groupId>
                 <artifactId>arquillian-test-spi</artifactId>
-                <version>${arquillian.version}</version>
+                <version>${version.arquillian}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
-      <pluginManagement>
-         <plugins>
-            <!-- Compiler plugin enforces Java 1.6 compatibility and activates 
-               annotation processors -->
+        <pluginManagement>
+            <plugins>
+                <!-- Compiler plugin enforces Java 1.6 compatibility and activates
+                   annotation processors -->
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
             <plugin>
-               <artifactId>maven-compiler-plugin</artifactId>
-               <version>2.3.2</version>
-               <configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
-               </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <pushChanges>false</pushChanges>
+                    <localCheckout>true</localCheckout>
+                    <tagNameFormat>@{project.artifactId}-@{project.version}</tagNameFormat>
+                </configuration>
             </plugin>
-         </plugins>
-      </pluginManagement>
+        </plugins>
     </build>
 
     <profiles>
@@ -80,16 +96,22 @@
         </profile>
     </profiles>
 
+    <scm>
+        <developerConnection>scm:git:https://github.com/it-crowd/mock-contexts-extension.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <distributionManagement>
         <repository>
-            <id>it-crowd.com.pl</id>
-            <name>IT Crowd company Internal Repository</name>
-            <url>http://artifactory.it-crowd.com.pl/libs-release-local</url>
+            <id>itcrowd.pl</id>
+            <name>IT Crowd company internal repository</name>
+            <url>http://artifactory.itcrowd.pl/libs-release-local</url>
         </repository>
         <snapshotRepository>
-            <id>it-crowd.com.pl</id>
-            <name>IT Crowd company Repository</name>
-            <url>http://artifactory.it-crowd.com.pl/libs-snapshot-local</url>
+            <id>itcrowd.pl</id>
+            <name>IT Crowd company internal repository</name>
+            <url>http://artifactory.itcrowd.pl/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
+
 </project>
