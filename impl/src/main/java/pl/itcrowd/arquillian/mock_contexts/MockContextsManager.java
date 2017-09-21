@@ -14,7 +14,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.lang.reflect.Method;
 import java.util.Iterator;

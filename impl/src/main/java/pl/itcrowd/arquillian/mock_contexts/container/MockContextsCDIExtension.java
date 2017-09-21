@@ -15,7 +15,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.util.AnnotationLiteral;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -28,7 +28,7 @@ public class MockContextsCDIExtension implements Extension {
     private void addScope(@Observes final BeforeBeanDiscovery event)
     {
         try {
-            Class.forName("javax.faces.bean.ViewScoped");
+            Class.forName("javax.faces.view.ViewScoped");
             event.addScope(ViewScoped.class, true, true);
         } catch (ClassNotFoundException e) {
 
@@ -122,7 +122,7 @@ public class MockContextsCDIExtension implements Extension {
         // Bail out of we can't find ViewScoped.
         // Means we're probably Running as client (@RunAsClient)
         try {
-            Class.forName("javax.faces.bean.ViewScoped");
+            Class.forName("javax.faces.view.ViewScoped");
         } catch (ClassNotFoundException e) {
             return;
         }
