@@ -21,11 +21,11 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.faces</groupId>
+            <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.0</version>
+            <version>2.2.14</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>  
 
         <dependency>
             <groupId>junit</groupId>
@@ -47,6 +47,13 @@
             <version>1.0.1</version>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-arquillian-container-remote</artifactId>
+            <version>8.2.1.Final</version>
+            <scope>test</scope>
+        </dependency>          
 
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
@@ -75,12 +82,7 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-arquillian-container-remote</artifactId>
-            <version>7.1.1.Final</version>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>

@@ -1,6 +1,6 @@
 package pl.itcrowd.arquillian.mock_contexts.container;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import java.lang.annotation.Annotation;
 
 public class MockViewScopedContext extends AbstractMockContext {

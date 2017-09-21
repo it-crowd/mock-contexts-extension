@@ -1,6 +1,6 @@
 package pl.itcrowd.arquillian.mock_contexts.test;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 
 @ViewScoped
