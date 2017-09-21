@@ -5,8 +5,7 @@ Forked from https://github.com/it-crowd/mock-contexts-extension
 
 This project helps to fix "No active contexts for scope type ViewScoped / ConversationScoped" exception which occures when arquillian tests ViewScoped and ConversationScoped controllers.
 
-JSF version: 2.2
-Tested on Wildfly 10
+JSF version: 2.2, tested on Wildfly 10
 
 
 Usage
@@ -32,7 +31,7 @@ Test coverage
 At this moment only SampleTest passes (I don't need remaining functionality)
 
 
-Usage
+Integration
 -----
 
 Download, build with "mvn clean install" and include in your project
